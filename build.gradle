@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.tienda'
+version = '0.7.1-SNAPSHOT'
+
+repositories { mavenCentral() }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+javafx {
+    version = '21.0.2'
+    modules = ['javafx.controls']
+}
+
+dependencies {
+    implementation 'org.xerial:sqlite-jdbc:3.46.1.3'
+    implementation 'org.flywaydb:flyway-core:10.20.1'
+    implementation 'org.slf4j:slf4j-simple:2.0.16'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application { mainClass = 'com.tienda.inventario.app.Main' }
+
+test { useJUnitPlatform() }
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}

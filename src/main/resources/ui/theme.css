@@ -1,0 +1,46 @@
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #f4f7fa;
+    -fx-text-fill: #172b3a;
+}
+.app-root { -fx-background-color: #f4f7fa; }
+.sidebar {
+    -fx-background-color: #102a3a;
+    -fx-padding: 30px 20px;
+}
+.brand { -fx-text-fill: #f7ffff; -fx-font-size: 20px; -fx-font-weight: bold; }
+.sidebar .muted { -fx-text-fill: #b1c2cc; }
+.sidebar-user { -fx-text-fill: white; -fx-font-weight: bold; }
+.screen-title { -fx-text-fill: #102c3c; -fx-font-size: 27px; -fx-font-weight: bold; }
+.muted { -fx-text-fill: #6e8391; }
+.overline { -fx-text-fill: #0b9e96; -fx-font-size: 12px; -fx-font-weight: bold; }
+.section-heading { -fx-text-fill: #153447; -fx-font-size: 17px; -fx-font-weight: bold; }
+.nav-button {
+    -fx-alignment: CENTER_LEFT; -fx-background-color: transparent; -fx-text-fill: #d4e1e8;
+    -fx-padding: 13px 15px; -fx-background-radius: 9px; -fx-cursor: hand;
+}
+.nav-button:hover { -fx-background-color: #254758; }
+.nav-active { -fx-background-color: #174f5e; -fx-text-fill: white; -fx-font-weight: bold; }
+.button { -fx-cursor: hand; -fx-padding: 11px 17px; -fx-background-radius: 8px; }
+.primary-button { -fx-background-color: #0b8f87; -fx-text-fill: white; -fx-font-weight: bold; }
+.primary-button:hover { -fx-background-color: #097a75; }
+.secondary-button { -fx-background-color: #e5eef2; -fx-text-fill: #16394d; }
+.secondary-button:hover { -fx-background-color: #d6e5eb; }
+.sidebar .secondary-button { -fx-background-color: #264858; -fx-text-fill: #f2fafc; }
+.text-field, .password-field, .combo-box {
+    -fx-background-color: white; -fx-border-color: #d5e1e7;
+    -fx-border-radius: 7px; -fx-background-radius: 7px; -fx-padding: 9px;
+}
+.text-field:focused, .password-field:focused { -fx-border-color: #0b9e96; }
+.auth-background { -fx-background-color: linear-gradient(to bottom right,#e7f6f3,#eff3f8); }
+.auth-card, .information-panel, .summary-card {
+    -fx-background-color: white; -fx-background-radius: 13px;
+    -fx-border-color: #e3eaf0; -fx-border-radius: 13px; -fx-padding: 25px;
+}
+.card-number { -fx-text-fill: #16394d; -fx-font-size: 28px; -fx-font-weight: bold; }
+.data-table { -fx-background-color: white; -fx-border-color: #e1eaf0; -fx-border-radius: 9px; }
+.data-table .column-header { -fx-background-color: #eaf1f5; -fx-padding: 10px; }
+.data-table .column-header-background { -fx-background-color: #eaf1f5; }
+.data-table .table-row-cell:filled:selected { -fx-background-color: #b8e4df; }
+.scroll-pane, .scroll-pane > .viewport { -fx-background-color: #f4f7fa; }

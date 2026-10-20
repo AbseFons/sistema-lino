@@ -1,0 +1,168 @@
+erDiagram
+    ROL ||--o{ USUARIO : posee
+    USUARIO ||--o{ PRODUCTO : crea
+    CATEGORIA ||--o{ PRODUCTO : clasifica
+    MARCA o|--o{ PRODUCTO : identifica
+    UNIDAD_MEDIDA ||--o{ PRODUCTO : mide
+    PRODUCTO ||--o{ PRODUCTO_COMPATIBILIDAD : aplica
+    PRODUCTO ||--o{ PRODUCTO_PRESENTACION : contiene
+    LISTA_PRECIO ||--o{ PRECIO_PRESENTACION : fija
+    PRODUCTO_PRESENTACION ||--o{ PRECIO_PRESENTACION : tarifa
+    PRODUCTO ||--|| SALDO_STOCK : saldo
+    PRODUCTO ||--o{ MOVIMIENTO_STOCK : kardex
+    USUARIO ||--o{ MOVIMIENTO_STOCK : registra
+    PROVEEDOR o|--o{ COMPRA : abastece
+    USUARIO ||--o{ COMPRA : registra
+    COMPRA ||--|{ COMPRA_DETALLE : contiene
+    PRODUCTO_PRESENTACION ||--o{ COMPRA_DETALLE : recibido
+    COMPRA_DETALLE o|--o| MOVIMIENTO_STOCK : genera
+    CLIENTE o|--o{ VENTA : compra
+    USUARIO ||--o{ VENTA : vende
+    LISTA_PRECIO o|--o{ VENTA : aplica
+    VENTA ||--|{ VENTA_DETALLE : contiene
+    PRODUCTO_PRESENTACION ||--o{ VENTA_DETALLE : vendido
+    VENTA_DETALLE o|--o| MOVIMIENTO_STOCK : genera
+    VENTA ||--|{ VENTA_PAGO : cobra
+    VENTA ||--o| COMPROBANTE : documenta
+    SERIE_COMPROBANTE o|--o{ COMPROBANTE : numera
+    COMPROBANTE ||--o{ COMPROBANTE_EVENTO : historial
+    USUARIO ||--o{ AUDITORIA : registra
+    USUARIO ||--o{ DEMANDA_NO_ATENDIDA : anota
+    CLIENTE o|--o{ DEMANDA_NO_ATENDIDA : solicita
+    PRODUCTO o|--o{ DEMANDA_NO_ATENDIDA : enlaza
+    USUARIO o|--o{ CONFIGURACION : actualiza
+
+    ROL {
+      INTEGER id PK
+      TEXT codigo UK
+      TEXT nombre
+    }
+    USUARIO {
+      INTEGER id PK
+      INTEGER rol_id FK
+      TEXT login UK
+      TEXT password_hash
+    }
+    PRODUCTO {
+      INTEGER id PK
+      TEXT sku UK
+      INTEGER categoria_id FK
+      INTEGER marca_id FK
+      INTEGER unidad_base_id FK
+      TEXT estado
+    }
+    CATEGORIA {
+      INTEGER id PK
+      TEXT nombre UK
+    }
+    MARCA {
+      INTEGER id PK
+      TEXT nombre UK
+    }
+    UNIDAD_MEDIDA {
+      INTEGER id PK
+      TEXT codigo UK
+    }
+    PRODUCTO_COMPATIBILIDAD {
+      INTEGER id PK
+      INTEGER producto_id FK
+      TEXT descripcion
+    }
+    PRODUCTO_PRESENTACION {
+      INTEGER id PK
+      INTEGER producto_id FK
+      INTEGER factor_base_milli
+    }
+    LISTA_PRECIO {
+      INTEGER id PK
+      TEXT codigo UK
+    }
+    PRECIO_PRESENTACION {
+      INTEGER id PK
+      INTEGER presentacion_id FK
+      INTEGER lista_precio_id FK
+      INTEGER precio_micro
+    }
+    SALDO_STOCK {
+      INTEGER producto_id PK,FK
+      INTEGER cantidad_milli
+    }
+    MOVIMIENTO_STOCK {
+      INTEGER id PK
+      INTEGER producto_id FK
+      INTEGER cantidad_delta_milli
+      INTEGER compra_detalle_id FK
+      INTEGER venta_detalle_id FK
+      INTEGER autorizado_por_id FK
+    }
+    PROVEEDOR {
+      INTEGER id PK
+      TEXT razon_social
+    }
+    COMPRA {
+      INTEGER id PK
+      INTEGER proveedor_id FK
+      INTEGER usuario_id FK
+      TEXT estado
+    }
+    COMPRA_DETALLE {
+      INTEGER id PK
+      INTEGER compra_id FK
+      INTEGER presentacion_id FK
+      INTEGER cantidad_base_milli
+    }
+    CLIENTE {
+      INTEGER id PK
+      TEXT tipo_documento
+      TEXT numero_documento
+    }
+    VENTA {
+      INTEGER id PK
+      TEXT operacion_uuid UK
+      INTEGER cliente_id FK
+      INTEGER vendedor_id FK
+      INTEGER total_centavos
+    }
+    VENTA_DETALLE {
+      INTEGER id PK
+      INTEGER venta_id FK
+      INTEGER presentacion_id FK
+      INTEGER cantidad_base_milli
+    }
+    VENTA_PAGO {
+      INTEGER id PK
+      INTEGER venta_id FK
+      TEXT medio
+      INTEGER monto_centavos
+    }
+    SERIE_COMPROBANTE {
+      INTEGER id PK
+      TEXT tipo
+      TEXT serie
+    }
+    COMPROBANTE {
+      INTEGER id PK
+      INTEGER venta_id FK,UK
+      TEXT idempotency_key UK
+      INTEGER serie_id FK
+      TEXT estado
+    }
+    COMPROBANTE_EVENTO {
+      INTEGER id PK
+      INTEGER comprobante_id FK
+      INTEGER numero_intento
+    }
+    DEMANDA_NO_ATENDIDA {
+      INTEGER id PK
+      INTEGER usuario_id FK
+      INTEGER producto_id FK
+    }
+    AUDITORIA {
+      INTEGER id PK
+      INTEGER usuario_id FK
+      TEXT accion
+    }
+    CONFIGURACION {
+      TEXT clave PK
+      INTEGER actualizado_por FK
+    }
